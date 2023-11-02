@@ -1,31 +1,31 @@
 import "@stdlib/deploy";
 
-contract CounterContract with Deployable {
-    
-    // variables to hold the value of the id and counter
-    id: Int as uint32;
-    val: Int as uint32;
-    
-    // sets initial value of val as 0 during deployment
-    init(id: Int) {
-        self.id = id;
-        self.val = 0;
+// SPDX-License-Identifier: MIT
+pragma ton-solidity >=0.49.0 <0.50.0;
+
+contract CounterContract {
+    uint32 public id;
+    uint32 public val;
+
+    constructor(uint32 _id) public {
+        id = _id;
+        val = 0;
     }
 
-    // increases the value of val by 1
-    receive("increment") {
-        self.val = self.val + 1;
+    function increment() public {
+        val++;
     }
 
-    // reads the current value of val
-    get fun counter(): Int {
-        return self.val;
+    function getCounter() public view returns (uint32) {
+        return val;
     }
 
-    get fun id(): Int {
-        return self.id;
+    function getId() public view returns (uint32) {
+        return id;
     }
 }
+
+   
 
 
 
